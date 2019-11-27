@@ -2,17 +2,20 @@ import React from 'react';
 import TaskInput from '../../components/TaskInput';
 
 
-class TaskView extends React.Component {
+class TaskView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {}
   }
   render() {
+
     return (
-      <React.Fragment>
-        <TaskInput taskRef={this.props.createNewTask()}/>
-        <p>TESTING THE TaskView</p>
-      </React.Fragment>
+      <div style={{'overflowY': 'auto'}}>
+        {this.props.taskList.map((myTask, idx) => <TaskInput key={idx} taskRef={myTask} taskIdx={idx} deleteTask={this.props.deleteTask}/>)}
+        <div className="addTaskDiv" onClick={this.props.createNewTask}>
+          Add Task
+        </div>
+      </div>
     );
   }
 }

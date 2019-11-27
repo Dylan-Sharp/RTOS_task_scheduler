@@ -26,6 +26,19 @@
   border-radius: 8px;
   background-color: #C8C8C8;
   width: 50%;
+  margin-top: 21px;
+}
+
+.addTaskDiv {
+  position: relative;
+  height: 113px;
+  border-radius: 8px;
+  background-color: #F2F2F2;
+  color: #C8C8C8;
+  text-align: center;
+  width: 50%;
+  margin-top: 21px;
+  font-size: 32px;
 }
 
 .TaskInput.h1 {
