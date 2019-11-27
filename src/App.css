@@ -20,3 +20,47 @@
 .App-link {
   color: #09d3ac;
 }
+
+.TaskInput {
+  position: relative;
+  border-radius: 8px;
+  background-color: #C8C8C8;
+  width: 50%;
+}
+
+.TaskInput.h1 {
+  align-items: center;
+  text-align: center;
+}
+
+.deleteIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 25px;
+  width: 25px;
+}
+
+.TaskInputGrid {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  font-size: 28px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.TaskInputBox {
+  margin-left: 5px;
+  border-bottom: 10px;
+  width: 40%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  font-size: 24px;
+}
+
+.TaskInputBox:focus {
+  border: 2px solid #555;
+}
