@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -26,6 +26,8 @@
   border-radius: 8px;
   background-color: #C8C8C8;
   width: 50%;
+  text-align: center;
+  margin: auto;
   margin-top: 21px;
 }
 
@@ -39,6 +41,9 @@
   width: 50%;
   margin-top: 21px;
   font-size: 32px;
+  user-select: none;
+  margin: auto;
+  margin-top: 20px;
 }
 
 .TaskInput.h1 {
@@ -76,4 +81,37 @@
 
 .TaskInputBox:focus {
   border: 2px solid #555;
+}
+
+.pagetab {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 20%;
+  border-radius: 15px;
+  background-color: #E0E0E0;
+  color: #C8C8C8;
+  height: 30px;
+  box-shadow: 0px 1px 2px black inset;
+  user-select: none;
+}
+
+.pagetab-selected {
+  border-radius: 15px;
+  background-color: #828282;
+  color: #FFFFFF;
+  width: 46%;
+  text-align: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.pagetab-unselected {
+  border-radius: 15px;
+  color: #4F4F4F;
+  width: 46%;
+  text-align: center;
+  align-items: center;
+  font-weight: bold;
 }

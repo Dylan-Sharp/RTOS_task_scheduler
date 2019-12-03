@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import Task from '../../datastructure/Task';
 import DeleteIcon from '../../delete.svg';
 
@@ -16,14 +17,14 @@ class TaskInput extends React.PureComponent {
   onInputChange = (event) => {
     this.props.taskRef[event.target.name] = event.target.value;
     this.setState({ci: this.props.taskRef.ci, pi: this.props.taskRef.pi, di: this.props.taskRef.di});
-    this.forceUpdate();
+    this.forceUpdate();  // Force this component to update.  This is brute force approach but it works for now.
   }
 
 
   render() {
     return (
       <div className="TaskInput">
-        <h1>Task {"T" + (this.props.taskIdx + 1).toString()}</h1>
+        <h1 style={{'margin': 'auto'}}>Task {"T" + (this.props.taskIdx + 1).toString()}</h1>
         <img src={ DeleteIcon }  className="deleteIcon" alt="Delete" onClick={() => this.props.deleteTask(this.props.taskIdx)} />
         <div className="TaskInputGrid">
           <div>
@@ -46,32 +47,14 @@ class TaskInput extends React.PureComponent {
 
 }
 
-function TaskInput2(props) {
-  function onInputChange(event) {
-    props.taskRef[event.target.name] = event.target.value;
-    //this.forceUpdate();
-  }
-
-  return (
-    <div className="TaskInput">
-      <h1>Task {"T" + (props.taskIdx + 1).toString()}</h1>
-      <img src={ DeleteIcon }  className="deleteIcon" alt="Delete" onClick={() => props.deleteTask(props.taskIdx)} />
-      <div className="TaskInputGrid">
-        <div>
-          Ci
-          <input className="TaskInputBox" type="number" id="ci" name="ci" value={props.taskRef.ci} onChange={onInputChange}/>
-        </div>
-        <div>
-          Pi
-          <input className="TaskInputBox" type="number" id="pi" name="pi" value={props.taskRef.pi} onChange={onInputChange}/>
-        </div>
-        <div>
-          Di
-          <input className="TaskInputBox" type="number" id="di" name="di" value={props.taskRef.di} onChange={onInputChange}/>
-        </div>
-      </div>
-    </div>
-  )
+TaskInput.propTypes = {
+  taskRef: PropTypes.shape({
+      ci: PropTypes.string.isRequired,
+      pi: PropTypes.string.isRequired,
+      di: PropTypes.string.isRequired,
+    }).isRequired,
+  taskIdx: PropTypes.number.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 }
 
 export default TaskInput;

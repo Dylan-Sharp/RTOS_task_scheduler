@@ -2,19 +2,21 @@ import React from 'react';
 import logo from './logo.svg';
 import TaskView from './containers/TaskView';
 import Task from './datastructure/Task';
+import PageTab from './components/PageTab';
 import './App.css';
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      taskList: [new Task(), new Task()],
+      taskList: [new Task(), new Task()], // Initialize task list with two empty tasks
+      taskPageSelected: true,
     }
   }
 
   createNewTask = () => {
     console.log("Creating task");
-    let newTask = new Task("T" + (this.state.taskList.length + 1).toString());
+    let newTask = new Task("T" + (this.state.taskList.length + 1).toString());  //TODO: Remove designator argument.
     this.setState({
       taskList: [...this.state.taskList, newTask]
     });
@@ -35,10 +37,23 @@ class App extends React.PureComponent {
     console.log(this.state.taskList);
   }
 
+  resetTasks = () => {
+    this.setState({
+      taskList: [new Task(), new Task()]
+    })
+  }
+
+  togglePage = () => {
+    this.setState({
+      taskPageSelected: !this.state.taskPageSelected,
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <TaskView taskList={this.state.taskList} createNewTask={this.createNewTask} deleteTask={this.deleteTask}/>
+        <div style={{'display': 'flex', 'justifyContent': 'center'}}><PageTab taskPageSelected={this.state.taskPageSelected} togglePage={this.togglePage}/></div>
+        <div style={{'display': 'flex', 'justifyContent': 'center'}}><TaskView taskList={this.state.taskList} createNewTask={this.createNewTask} deleteTask={this.deleteTask} resetTasks={this.resetTasks}/></div>
       </div>
     );
   }
