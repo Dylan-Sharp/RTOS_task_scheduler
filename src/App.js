@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import TaskView from './containers/TaskView';
-import Task from './datastructure/Task';
+import ScheduleView from './containers/ScheduleView';
+import Task from './utils/Task';
 import PageTab from './components/PageTab';
 import './App.css';
 
@@ -52,8 +53,17 @@ class App extends React.PureComponent {
   render() {
     return (
       <div className="App">
-        <div style={{'display': 'flex', 'justifyContent': 'center'}}><PageTab taskPageSelected={this.state.taskPageSelected} togglePage={this.togglePage}/></div>
-        <div style={{'display': 'flex', 'justifyContent': 'center'}}><TaskView taskList={this.state.taskList} createNewTask={this.createNewTask} deleteTask={this.deleteTask} resetTasks={this.resetTasks}/></div>
+        <div style={{'display': 'flex', 'justifyContent': 'center'}}>
+          <PageTab taskPageSelected={this.state.taskPageSelected} togglePage={this.togglePage}/>
+        </div>
+
+        {this.state.taskPageSelected ?
+          <div style={{'display': 'flex', 'justifyContent': 'center'}}>
+            <TaskView taskList={this.state.taskList} createNewTask={this.createNewTask} deleteTask={this.deleteTask} resetTasks={this.resetTasks}/>
+          </div>
+        :
+          <ScheduleView taskList={this.state.taskList}/>
+        }
       </div>
     );
   }

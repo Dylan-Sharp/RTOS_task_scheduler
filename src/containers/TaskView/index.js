@@ -12,7 +12,9 @@ class TaskView extends React.PureComponent {
 
     return (
       <div>
-        <div style={{'textDecoration': 'underline', 'color': 'blue', 'userSelect': 'none', 'position': 'relative','left': 'calc(50% / 2)', 'bottom': '-10px' }} onClick={this.props.resetTasks}>Clear all tasks</div>
+        <div style={{'textDecoration': 'underline', 'color': 'blue', 'userSelect': 'none', 'position': 'relative','left': 'calc(50% / 2)', 'bottom': '-10px' }} onClick={this.props.resetTasks}>
+          Clear all tasks
+        </div>
         <div style={{'overflowY': 'auto', 'height': '800px'}}>
           {this.props.taskList.map((myTask, idx) => <TaskInput key={idx} taskRef={myTask} taskIdx={idx} deleteTask={this.props.deleteTask}/>)}
           <div className="addTaskDiv" onClick={this.props.createNewTask}>
