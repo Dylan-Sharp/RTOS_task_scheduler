@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Task from '../../utils/Task';
 import DeleteIcon from '../../delete.svg';
 
-class TaskInput extends React.PureComponent {
+class TaskInput extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +15,11 @@ class TaskInput extends React.PureComponent {
   }
 
   onInputChange = (event) => {
+    console.log(event.target.name)
     this.props.taskRef[event.target.name] = event.target.value;
+    if (this.props.disableDi && event.target.name === "pi") {
+      this.props.taskRef['di'] = event.target.value;
+    }
     this.setState({ci: this.props.taskRef.ci, pi: this.props.taskRef.pi, di: this.props.taskRef.di});
     this.forceUpdate();  // Force this component to update.  This is brute force approach but it works for now.
   }
@@ -37,7 +41,7 @@ class TaskInput extends React.PureComponent {
           </div>
           <div>
             Di
-            <input className="TaskInputBox" type="number" id="di" name="di" value={this.props.taskRef.di} onChange={this.onInputChange}/>
+            <input className="TaskInputBox" type="number" disabled={this.props.disableDi} id="di" name="di" value={this.props.taskRef.di} onChange={this.onInputChange}/>
           </div>
         </div>
       </div>
@@ -47,12 +51,17 @@ class TaskInput extends React.PureComponent {
 
 }
 
+TaskInput.defalutProps = {
+  disableDi: false,
+}
+
 TaskInput.propTypes = {
   taskRef: PropTypes.shape({
       ci: PropTypes.string.isRequired,
       pi: PropTypes.string.isRequired,
       di: PropTypes.string.isRequired,
     }).isRequired,
+  disableDi: PropTypes.bool.isRequired,
   taskIdx: PropTypes.number.isRequired,
   deleteTask: PropTypes.func.isRequired,
 }
