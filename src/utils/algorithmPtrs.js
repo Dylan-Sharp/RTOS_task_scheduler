@@ -50,7 +50,7 @@ export class RMS extends SchedulingAlgorithm {
         }
 
         // Check if Wi(tprev) = tprev (and veriy tnew <= di, don't really need to check this since its checked in while loop and tnew == tprev but just for safety)
-        if (tnew == tprev && tnew <= parseInt(sorted_tasks[i].di)) {
+        if (tnew === tprev && tnew <= parseInt(sorted_tasks[i].di)) {
           // This task (sorted_tasks[i] is schedulable!!)
           test_pass = true;
           break;
@@ -110,7 +110,7 @@ export class RMS extends SchedulingAlgorithm {
       for(let j = 0; j < sorted_ready_tasks.length; j++) {
 
         // Restore Ci for current period if ready.
-        if (i % parseInt(sorted_ready_tasks[j].taskRef.pi) == 0) {
+        if (i % parseInt(sorted_ready_tasks[j].taskRef.pi) === 0) {
           sorted_ready_tasks[j].timeLeftInPeriod = parseInt(sorted_ready_tasks[j].taskRef.ci)
         }
 

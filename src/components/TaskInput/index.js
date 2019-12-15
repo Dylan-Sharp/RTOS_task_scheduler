@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import Task from '../../utils/Task';
 import DeleteIcon from '../../delete.svg';
 
 class TaskInput extends React.Component {

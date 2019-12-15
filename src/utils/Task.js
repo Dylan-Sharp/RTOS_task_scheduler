@@ -17,11 +17,3 @@ export default class Task {
   }
 
 }
-
-class TaskTimeBlock {
-  constructor(taskRef, start, end) {
-    this.taskRef = taskRef;
-    this.startTime = start;
-    this.endTime = end;
-  }
-}
