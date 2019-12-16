@@ -21,7 +21,7 @@ class App extends React.PureComponent {
   }
 
   createNewTask = () => {
-    console.log("Creating task");
+    console.log("Creating Task");
     let newTask = new Task(this.state.taskList.length + 1);
     this.setState({
       taskList: [...this.state.taskList, newTask]
@@ -33,14 +33,13 @@ class App extends React.PureComponent {
     if (this.state.taskList.length <= 2) {
       return;
     }
-    console.log("Deleting");
+    console.log("Deleting Task");
     const newList = [...this.state.taskList]; // Create a copy of the list.  Should be a shallow copy.
     newList.splice(idx, 1);
     for(let i = 0; i < newList.length; i++) newList[i].idx = (i + 1);
     this.setState({
       taskList: newList,
     })
-    console.log(newList);
   }
 
   resetTasks = () => {

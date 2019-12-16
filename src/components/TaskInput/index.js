@@ -14,7 +14,6 @@ class TaskInput extends React.Component {
   }
 
   onInputChange = (event) => {
-    console.log(event.target.name)
     this.props.taskRef[event.target.name] = event.target.value;
     if (this.props.disableDi && event.target.name === "pi") {
       this.props.taskRef['di'] = event.target.value;
