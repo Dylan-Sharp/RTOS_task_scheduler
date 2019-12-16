@@ -158,4 +158,73 @@ export class EDF extends SchedulingAlgorithm {
     }
     return false;
   }
+
+  static _isScheduleDone(sorted_ready_tasks) {
+    for(let i = 0; i < sorted_ready_tasks.length; i++) {
+      if(sorted_ready_tasks[i].deadlines.length > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  generateSchedule(sorted_tasks) {
+    var periods = []
+    for(let i = 0; i < sorted_tasks.length; i++) periods.push(sorted_tasks[i].pi);
+    var lcm = lcm_from_list(periods)  //Computes least common multipule needed for schedule
+    var sorted_ready_tasks = []
+    for(let i = 0; i < sorted_tasks.length; i++) {
+      sorted_ready_tasks.push({
+        'taskRef': sorted_tasks[i],
+        'deadlines': []
+      });
+    }
+
+    var schedule = []
+    var scheduleIdx = 0;  // Used to keep track of where we are at in our schedule (we could just use schedule array)
+
+    // Loop through unit all task periods are past lcm of schedule and submit deadlines.
+    do {
+
+      var selectedTask = null;
+      for(let j = 0; j < sorted_ready_tasks.length; j++) {
+
+        // Add dead line if needed and its not past lcm in scheduler.
+        if(scheduleIdx % parseInt(sorted_ready_tasks[j].taskRef.pi) === 0 && scheduleIdx / lcm < 1) {
+          sorted_ready_tasks[j].deadlines.push({
+            'ciRemaining': sorted_ready_tasks[j].taskRef.ci,
+            'di': Math.floor(scheduleIdx / sorted_ready_tasks[j].taskRef.pi) * sorted_ready_tasks[j].taskRef.di,
+          });
+          console.log("Pushing deadline to task: " + sorted_ready_tasks[j].taskRef.idx)
+        }
+
+        console.log(sorted_ready_tasks)
+        if(sorted_ready_tasks[j].deadlines.length > 0 && (selectedTask == null || selectedTask.deadlines[0].di > sorted_ready_tasks[j].deadlines[0].di)) {
+          selectedTask = sorted_ready_tasks[j]
+          console.log("selecting task: " + selectedTask.taskRef.idx)
+        }
+
+      }
+
+      if (selectedTask) {
+        selectedTask.deadlines[0].ciRemaining -= 1;
+        schedule.push(selectedTask.taskRef);
+        console.log("Adding task " + selectedTask.taskRef.idx + " to schedule.")
+
+        // Check if we have finished ci for deadline period.
+        //    if so remove it from head of deadline queue for this task
+        if(selectedTask.deadlines[0].ciRemaining <= 0) {
+          console.log("Poping off deadline")
+          selectedTask.deadlines.pop();
+        }
+      } else {
+        console.log("Add null to schedule")
+        schedule.push(null);
+      }
+
+      scheduleIdx += 1;
+    } while(EDF._isScheduleDone(sorted_ready_tasks) || scheduleIdx < lcm)
+    console.log(schedule)
+    return schedule
+  }
 }

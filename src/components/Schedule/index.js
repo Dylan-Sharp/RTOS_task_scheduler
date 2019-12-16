@@ -7,7 +7,8 @@ var colorArr = ['#F1948A', '#BB8FCE', '#85C1E9', '#76D7C4', '#F7DC6F', '#E59866'
 
 function Schedule(props) {
   return (
-    <div style={{'overflow': 'auto', 'width': '75%', 'display': 'flex', 'justifyContent': 'center'}}>
+    <div style={{'width': '75%', 'display': 'flex', 'justifyContent': 'center'}}>
+      <div style={{'overflowX': 'scroll'}}>
       <table>
         <tbody>
           <tr>
@@ -28,6 +29,7 @@ function Schedule(props) {
           </tr>
         </tbody>
       </table>
+    </div>
     </div>
   );
 }
