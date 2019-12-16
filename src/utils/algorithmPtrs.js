@@ -86,7 +86,7 @@ export class RMS extends SchedulingAlgorithm {
       return true
     }
     console.log("RMS CPU Utilizaiton: Failed")
-    return this.exact_analysis(sorted_tasks)
+    return this.exactAnalysis(sorted_tasks)
   }
 
   generateSchedule(sorted_tasks) {
