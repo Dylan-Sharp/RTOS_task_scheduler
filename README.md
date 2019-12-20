@@ -8,8 +8,9 @@ Currently the project supports RMS and EDF scheduling algorithms with the abilit
 
 ## File Heirarchy
 Key files are described below.
-|Location|Description  |
-|--|--|
+
+| Location | Description  |
+| -- | -- |
 | src/App.js | Root Component, also where main data store is for application |
 | src/utils/ | Directory with key utilities and data-structures used through out project |
 | **---> src/utils/algorithmPtrs.js** | **Contains RTOS Scheduling Algorithm data-structure** |
